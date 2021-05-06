@@ -16,14 +16,14 @@ const client = new Client({
 
 client.connect(() => console.log('Connected!'));
 
-const jsonPath = path.join(__dirname, 'questions.csv');
-const tableName = 'questions';
+const jsonPath = path.join(__dirname, 'answers.csv');
+const tableName = 'answers';
 
 const createTable = `
   DROP TABLE IF EXISTS ${tableName};
   CREATE TABLE IF NOT EXISTS ${tableName} (
     ID SERIAL PRIMARY KEY,
-    PRODUCT_ID INT NOT NULL,
+    QUESTION_ID INT NOT NULL,
     BODY VARCHAR(1000) NOT NULL,
     DATE TIMESTAMP NOT NULL,
     NAME VARCHAR(60) NOT NULL,
