@@ -26,10 +26,18 @@ app.get('/qa/answers/:question_id', (req, res) => {
 
 app.put('/qa/questions/:question_id/helpful', (req, res) => {
   console.log('received put request for questions');
-  queries.updateHelpfulness(req, res);
+  queries.updateQuestionHelpfulness(req, res);
 });
 
 app.put('/qa/questions/:question_id/report', (req, res) => {
   console.log('Reporting question');
   queries.reportQuestion(req, res);
+});
+
+app.put('/qa/answers/:answer_id/helpful', (req, res) => {
+  queries.updateAnswerHelpfulness(req, res);
+});
+
+app.put('/qa/answers/:answer_id/report', (req, res) => {
+  queries.reportAnswer(req, res);
 });

@@ -40,7 +40,7 @@ module.exports = {
 
   },
 
-  updateHelpfulness: (req, res) => {
+  updateQuestionHelpfulness: (req, res) => {
     const question_id = req.params.question_id;
     db.query(`UPDATE questions SET helpfulness = helpfulness + 1 WHERE question_id = ${question_id};`, (err, data) => {
       if (err) {
@@ -54,6 +54,28 @@ module.exports = {
   reportQuestion: (req, res) => {
     const question_id = req.params.question_id;
     db.query(`UPDATE questions SET reported = true WHERE question_id = ${question_id};`, (err, data) => {
+      if (err) {
+        res.status(404).send(err);
+      } else {
+        res.status(204).end();
+      }
+    });
+  },
+
+  updateAnswerHelpfulness: (req, res) => {
+    const answer_id = req.params.answer_id;
+    db.query(`UPDATE answers SET helpfulness = helpfulness + 1 WHERE answer_id = ${answer_id};`, (err, data) => {
+      if (err) {
+        res.status(404).send(err);
+      } else {
+        res.status(204).end();
+      }
+    })
+  },
+
+  reportAnswer: (req, res) => {
+    const answer_id = req.params.answer_id;
+    db.query(`UPDATE answers SET reported = true WHERE answer_id = ${answer_id};`, (err, data) => {
       if (err) {
         res.status(404).send(err);
       } else {
