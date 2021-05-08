@@ -14,7 +14,22 @@ app.listen(PORT, () => {
   console.log(`Listening on port ${PORT}`);
 });
 
-app.get('/questions/:product_id', (req, res) => {
+app.get('/qa/questions/:product_id', (req, res) => {
   console.log('received get request');
-  queries.getQuestions(req.params.product_id, res);
-})
+  queries.getQuestions(req, res);
+});
+
+app.get('/qa/answers/:question_id', (req, res) => {
+  console.log('Received get request for answers');
+  queries.getAnswers(req, res);
+});
+
+app.put('/qa/questions/:question_id/helpful', (req, res) => {
+  console.log('received put request for questions');
+  queries.updateHelpfulness(req, res);
+});
+
+app.put('/qa/questions/:question_id/report', (req, res) => {
+  console.log('Reporting question');
+  queries.reportQuestion(req, res);
+});
