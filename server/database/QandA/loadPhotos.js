@@ -22,7 +22,7 @@ const tableName = 'answer_photos';
 const createTable = `
   DROP TABLE IF EXISTS ${tableName};
   CREATE TABLE IF NOT EXISTS ${tableName} (
-    ID SERIAL PRIMARY KEY,
+    PHOTO_ID SERIAL PRIMARY KEY,
     ANSWER_ID INT NOT NULL,
     URL VARCHAR(1000) NOT NULL
   );`;

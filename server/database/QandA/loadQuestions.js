@@ -22,7 +22,7 @@ const tableName = 'questions';
 const createTable = `
   DROP TABLE IF EXISTS ${tableName};
   CREATE TABLE IF NOT EXISTS ${tableName} (
-    ID SERIAL PRIMARY KEY,
+    QUESTION_ID SERIAL PRIMARY KEY,
     PRODUCT_ID INT NOT NULL,
     BODY VARCHAR(1000) NOT NULL,
     DATE TIMESTAMP NOT NULL,
