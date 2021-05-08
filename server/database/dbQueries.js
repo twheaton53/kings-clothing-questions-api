@@ -84,7 +84,34 @@ module.exports = {
     });
   },
 
-  post: (req, res) => {
-
+  postQuestion: (req, res) => {
+    const product_id = req.body.product_id;
+    const queryString = `INSERT INTO questions
+    (product_id, body, date, name, email, reported, helpfulness)
+    VALUES
+    ($1, $2, current_timestamp, $3, $4, false, 0)`;
+    const args = [product_id, req.body.body, req.body.name, req.body.email]
+    db.query(queryString, args)
+      .then(() => {
+        res.status(204).end();
+      })
+      .catch((err) => {
+        res.status(404).send(err);
+      })
   },
+
+  postAnswer: (req, res) => {
+    const queryString = `INSERT INTO answers
+    (question_id, body, date, name, email, reported, helpfulness)
+    VALUES
+    ($1, $2, current_timestamp, $3, $4, false, 0)`;
+    const args = [product_id, req.body.body, req.body.name, req.body.email]
+    db.query(queryString, args)
+      .then(() => {
+        res.status(204).end();
+      })
+      .catch((err) => {
+        res.status(404).send(err);
+      })
+  }
 }

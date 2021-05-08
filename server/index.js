@@ -41,3 +41,11 @@ app.put('/qa/answers/:answer_id/helpful', (req, res) => {
 app.put('/qa/answers/:answer_id/report', (req, res) => {
   queries.reportAnswer(req, res);
 });
+
+app.post('/qa/questions', (req, res) => {
+  queries.postQuestion(req, res);
+});
+
+app.post('/qa/answers', (req, res) => {
+  queries.postAnswer(req, res);
+});

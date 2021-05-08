@@ -47,10 +47,29 @@ fileStream.on('error', (error) => {
 stream.on('error', (error) => {
   console.log(`Error in copy command ${error}`);
 })
+
+const alterTable = `
+ALTER TABLE ${tableName}
+DROP COLUMN PHOTO_ID,
+ADD COLUMN PHOTO_ID SERIAL PRIMARY KEY;
+DROP INDEX IF EXISTS photos_idx;
+CREATE INDEX IF NOT EXISTS photos_idx ON ${tableName} (photo_id, answer_id);
+`;
+
+
 stream.on('finish', () => {
   console.log(`Completed loading data into ${tableName}`);
-  client.end();
-})
+  console.log('Starting alter table');
+    console.time('Alter execution time');
+    client.query(alterTable).then(() => {
+      console.log('Altered successfully!');
+      console.timeEnd('Alter execution time');
+      client.end();
+    })
+    .catch((err) => {
+      console.error(err);
+    })
+});
 
 fileStream.on('open', () => fileStream.pipe(stream));
 fileStream.on('end', () => {
