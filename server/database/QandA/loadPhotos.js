@@ -53,7 +53,7 @@ ALTER TABLE ${tableName}
 DROP COLUMN PHOTO_ID,
 ADD COLUMN PHOTO_ID SERIAL PRIMARY KEY;
 DROP INDEX IF EXISTS photos_idx;
-CREATE INDEX IF NOT EXISTS photos_idx ON ${tableName} (photo_id, answer_id);
+CREATE INDEX IF NOT EXISTS photos_idx ON ${tableName} (answer_id);
 `;
 
 
@@ -61,14 +61,15 @@ stream.on('finish', () => {
   console.log(`Completed loading data into ${tableName}`);
   console.log('Starting alter table');
     console.time('Alter execution time');
-    client.query(alterTable).then(() => {
-      console.log('Altered successfully!');
-      console.timeEnd('Alter execution time');
-      client.end();
-    })
-    .catch((err) => {
-      console.error(err);
-    })
+    client.query(alterTable)
+      .then(() => {
+        console.log('Altered successfully!');
+        console.timeEnd('Alter execution time');
+        client.end();
+      })
+      .catch((err) => {
+        console.error(err);
+      })
 });
 
 fileStream.on('open', () => fileStream.pipe(stream));

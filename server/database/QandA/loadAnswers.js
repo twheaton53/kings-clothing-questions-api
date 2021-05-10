@@ -58,7 +58,7 @@ ALTER TABLE ${tableName}
 DROP COLUMN ANSWER_ID,
 ADD COLUMN ANSWER_ID SERIAL PRIMARY KEY;
 DROP INDEX IF EXISTS answers_idx;
-CREATE INDEX IF NOT EXISTS answers_idx ON ${tableName} (answer_id, question_id);
+CREATE INDEX IF NOT EXISTS answers_idx ON ${tableName} (question_id);
 `;
 
 

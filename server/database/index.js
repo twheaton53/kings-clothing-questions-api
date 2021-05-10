@@ -1,7 +1,7 @@
 const config = require('../../config/config.js');
-const { Client } = require('pg');
+const { Pool } = require('pg');
 
-const client = new Client({
+const pool = new Pool({
   user: 'postgres',
   host: 'localhost',
   database: 'Questions',
@@ -9,7 +9,7 @@ const client = new Client({
   port: 5432
 });
 
-client.connect((err, res) => {
+pool.connect((err, res) => {
   if (err) {
     throw err;
   } else {
@@ -17,4 +17,4 @@ client.connect((err, res) => {
   }
 });
 
-module.exports = client;
+module.exports = pool;

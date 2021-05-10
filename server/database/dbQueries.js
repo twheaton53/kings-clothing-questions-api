@@ -9,7 +9,7 @@ module.exports = {
     const count = req.query.count || 5;
     const page = req.query.page || 1;
     const offset = count * page - count;
-    db.query(`SELECT * FROM questions WHERE product_id = ${product_id} ORDER BY helpfulness DESC LIMIT '${count}' OFFSET '${offset}';`, (err, data) => {
+    db.query(`SELECT * FROM questions WHERE product_id = ${product_id};`, (err, data) => {
       if (err) {
         res.status(404).send(err);
       } else {
@@ -33,11 +33,6 @@ module.exports = {
         res.end();
       }
     });
-  },
-
-  // Requires answer_id, get all photos determined by answer_id
-  getPhotos: (req, res) => {
-
   },
 
   updateQuestionHelpfulness: (req, res) => {
