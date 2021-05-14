@@ -6,6 +6,7 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "nodemon server/index.js",
+    "db": "nodemon server/database/index.js",
     "loadQuestions": "nodemon server/database/QandA/loadQuestions.js",
     "loadAnswers": "nodemon server/database/QandA/loadAnswers.js",
     "loadPhotos": "nodemon server/database/QandA/loadPhotos.js",

@@ -7,9 +7,9 @@ const path = require('path');
 const csv = require('csv-parser');
 
 const client = new Client({
-  user: 'postgres',
-  host: 'localhost',
-  database: 'Questions',
+  user: 'ubuntu',
+  host: 'ec2-18-188-53-43.us-east-2.compute.amazonaws.com',
+  database: 'questions',
   password: config.TOKEN,
   port: 5432
 });

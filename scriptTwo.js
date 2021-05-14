@@ -3,7 +3,7 @@ import { check } from 'k6';
 
 export default function () {
     const rnd = Math.floor(Math.random() * 10);
-    const response = http.get(`http://localhost:3000/qa/answers/34`);
+    const response = http.get(`http://ec2-3-22-14-2.us-east-2.compute.amazonaws.com/qa/answers/34`);
     console.log('Response time was ' + String(response.timings.duration) + ' ms');
     check(response, {
         "is status 200": (r) => r.status === 200,
@@ -20,9 +20,9 @@ export let options = {
   scenarios: {
     constant_request_rate: {
       executor: 'constant-arrival-rate',
-      rate: 1000,
+      rate: 500,
       timeUnit: '1s',
-      duration: '20s',
+      duration: '60s',
       preAllocatedVUs: 20,
       maxVUs: 50,
     },
